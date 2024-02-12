@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homePage</title>
+    <link rel="stylesheet" href="../static/homePage.css">
+</head>
+
+<body>
+    <div style="margin-left: 43%; margin-top: 10px;">
+        <h2>Work Experience</h2>
+    </div>
+
+    <form method="POST" action="{% url 'homePage' %}">
+        {% csrf_token %}
+        <div class="form-container">
+            <table id="jobTable">
+                <thead>
+                    <tr>
+                        <th>Sl no</th>
+                        <th>Company Name</th>
+                        <th>Role</th>
+                        <th>Date of Joining</th>
+                        <th>Last Date</th>
+                        <th>X</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for experience in experiences %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ experience.company_name }}</td>
+                        <td>{{ experience.role }}</td>
+                        <td>{{ experience.date_of_joining }}</td>
+                        <td>{{ experience.last_date }}</td>
+                        <td><button style="width: 100%; height: auto; background-color: rgb(207, 26, 26);"><a href="/delete_experience/{{experience.id}}/" style="text-decoration: none; color: aliceblue;">X</a></button></td>
+                       
+                    </tr>
+                    {% endfor %}
+                   
+
+                </tbody>
+            </table>
+        </div>
+        <button type="button" id="addRowBtn" class="center-button">Add more</button>
+        <button type="submit" class="center-button">Save</button>
+    </form>
+
+    <script src="../static/homePage.js"></script>
+</body>
+
+</html>
